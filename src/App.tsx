@@ -260,8 +260,24 @@ export function App() {
                 className="btn"
                 onClick={() => setSyncOpen(true)}
                 title={`Cloud Sync: ${syncStatus}`}
+                style={{
+                  borderColor: syncError
+                    ? 'rgba(244, 63, 94, 0.45)'
+                    : syncConfig.gistId && syncConfig.token
+                    ? 'rgba(16, 185, 129, 0.45)'
+                    : undefined,
+                }}
               >
-                <Cloud size={15} />
+                <Cloud
+                  size={15}
+                  color={
+                    syncError
+                      ? 'var(--accent-rose)'
+                      : syncConfig.gistId && syncConfig.token
+                      ? 'var(--accent-emerald)'
+                      : undefined
+                  }
+                />
                 <span>Sync</span>
                 <span
                   className="sync-dot"

@@ -191,15 +191,44 @@ export function CloudSyncModal({
           <div
             style={{
               fontSize: 12,
-              color: syncError ? 'var(--accent-rose)' : 'var(--text-secondary)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              color: syncError
+                ? 'var(--accent-rose)'
+                : isConnected
+                ? 'var(--accent-emerald)'
+                : 'var(--text-secondary)',
               padding: '8px 10px',
               borderRadius: 8,
-              background: 'var(--bg-secondary)',
-              border: '1px solid var(--border)',
+              background: syncError
+                ? 'rgba(244, 63, 94, 0.08)'
+                : isConnected
+                ? 'rgba(16, 185, 129, 0.08)'
+                : 'var(--bg-secondary)',
+              border: `1px solid ${
+                syncError
+                  ? 'rgba(244, 63, 94, 0.35)'
+                  : isConnected
+                  ? 'rgba(16, 185, 129, 0.35)'
+                  : 'var(--border)'
+              }`,
             }}
           >
-            Status: <strong>{syncStatus}</strong>
-            {localMsg && <div style={{ marginTop: 4, color: 'var(--accent-cyan)' }}>{localMsg}</div>}
+            <span
+              className="sync-dot"
+              style={{
+                background: syncError
+                  ? 'var(--accent-rose)'
+                  : isConnected
+                  ? 'var(--accent-emerald)'
+                  : 'var(--text-muted)',
+              }}
+            />
+            <div>
+              Status: <strong>{syncStatus}</strong>
+              {localMsg && <div style={{ marginTop: 4, color: 'var(--accent-cyan)' }}>{localMsg}</div>}
+            </div>
           </div>
         </div>
 
